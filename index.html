@@ -620,21 +620,29 @@ footer strong {
 </div>
 
 <script>
+// Updated Stream URL
 const streamUrl = "https://binge-giotv.pages.dev/player2?id=ss1";
 
 window.onload = function() {
-  if (sessionStorage.getItem("elite_access") === "true") {
-    document.getElementById("popup").style.display = "none";
-  }
-  const viewport = document.getElementById('viewport');
-  viewport.innerHTML = `<iframe id="stream-player" src="${streamUrl}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen="true" referrerpolicy="no-referrer"></iframe>`;
+    if(sessionStorage.getItem("elite_access") === "true") {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    const viewport = document.getElementById('viewport');
+
+    viewport.innerHTML = `
+        <iframe 
+            id="stream-player"
+            src="${streamUrl}" 
+            allow="autoplay; encrypted-media; fullscreen" 
+            allowfullscreen="true" 
+            referrerpolicy="no-referrer">
+        </iframe>
+    `;
 };
 
 function closePopup() {
-  const overlay = document.getElementById("popup");
-  overlay.style.opacity = "0";
-  overlay.style.transition = "opacity 0.3s ease";
-  setTimeout(() => overlay.style.display = "none", 300);
+  document.getElementById("popup").style.display = "none";
   sessionStorage.setItem("elite_access", "true");
 }
 
@@ -644,16 +652,17 @@ function copyLink() {
 }
 
 function sharePage() {
-  if (navigator.share) {
-    navigator.share({ title: 'EdgeLive | Star Sports 1 HD', url: window.location.href });
+  if(navigator.share) {
+    navigator.share({ title: 'CricxCrate Live', url: window.location.href });
   } else {
     copyLink();
   }
 }
 
 document.onkeydown = (e) => {
-  if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) return false;
+    if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) return false;
 };
 </script>
+  
 </body>
 </html>
