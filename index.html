@@ -621,8 +621,7 @@ footer strong {
 
 <script>
 // Updated Stream URL
-const streamUrl = "https://jtvxweb.pages.dev/pind?id=1106";  
-  
+const streamUrl = "https://jtvxweb.pages.dev/pind?id=1106";
 
 window.onload = function() {
     if(sessionStorage.getItem("elite_access") === "true") {
@@ -654,7 +653,7 @@ function copyLink() {
 
 function sharePage() {
   if(navigator.share) {
-    navigator.share({ title: 'EDGE LIVE Live', url: window.location.href });
+    navigator.share({ title: 'CricxCrate Live', url: window.location.href });
   } else {
     copyLink();
   }
@@ -664,6 +663,6 @@ document.onkeydown = (e) => {
     if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) return false;
 };
 </script>
-  
+
 </body>
 </html>
