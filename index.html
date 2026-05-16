@@ -240,6 +240,52 @@ body {
 
 .pbb-right { display:flex; align-items:center; gap:6px; }
 
+.fs-btn {
+  background: rgba(26,107,255,0.25);
+  border: 1px solid rgba(61,142,255,0.4);
+  color: #fff;
+  width: 32px; height: 32px;
+  border-radius: 9px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s ease;
+  line-height: 1;
+  padding: 0;
+}
+.fs-btn:hover { background: rgba(26,107,255,0.5); transform: scale(1.1); }
+.fs-btn:active { transform: scale(0.93); }
+
+/* Fullscreen mode styles */
+.player-shell:fullscreen,
+.player-shell:-webkit-full-screen,
+.player-shell:-moz-full-screen,
+.player-shell:-ms-fullscreen {
+  width: 100vw !important;
+  height: 100vh !important;
+  border-radius: 0 !important;
+  background: #000;
+  display: flex; flex-direction: column;
+}
+
+.player-shell:fullscreen .player-frame,
+.player-shell:-webkit-full-screen .player-frame,
+.player-shell:-moz-full-screen .player-frame,
+.player-shell:-ms-fullscreen .player-frame {
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: unset !important;
+  flex: 1;
+}
+
+.player-shell:fullscreen iframe,
+.player-shell:-webkit-full-screen iframe,
+.player-shell:-moz-full-screen iframe,
+.player-shell:-ms-fullscreen iframe {
+  width: 100% !important;
+  height: 100% !important;
+}
+
 /* ── CHANNEL + STATUS STRIP ── */
 .ch-strip {
   display:flex; align-items:center; justify-content:space-between;
@@ -601,6 +647,9 @@ footer strong { font-family:'Rajdhani',sans-serif;font-size:13px;color:var(--mut
               <div class="q-pill" onclick="setQ(this,'SD')">SD</div>
             </div>
           </div>
+          <div class="pbb-right">
+            <button class="fs-btn" id="fsBtn" onclick="toggleFullscreen()">⛶</button>
+          </div>
         </div>
 
       </div>
@@ -778,7 +827,59 @@ function reloadStream() {
   }
 }
 
-// ── QUALITY PILLS ──
+// ── FULLSCREEN (no new tab) ──
+function toggleFullscreen() {
+  const shell = document.querySelector('.player-shell');
+  const btn = document.getElementById('fsBtn');
+
+  const isFS = !!(
+    document.fullscreenElement ||
+    document.webkitFullscreenElement ||
+    document.mozFullScreenElement ||
+    document.msFullscreenElement
+  );
+
+  if (!isFS) {
+    // Enter fullscreen on the player shell element
+    if (shell.requestFullscreen) shell.requestFullscreen();
+    else if (shell.webkitRequestFullscreen) shell.webkitRequestFullscreen();
+    else if (shell.mozRequestFullScreen) shell.mozRequestFullScreen();
+    else if (shell.msRequestFullscreen) shell.msRequestFullscreen();
+    btn.textContent = '✕';
+    btn.title = 'Exit Fullscreen';
+    // Lock to landscape on mobile
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock('landscape').catch(() => {});
+    }
+  } else {
+    if (document.exitFullscreen) document.exitFullscreen();
+    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+    else if (document.msExitFullscreen) document.msExitFullscreen();
+    btn.textContent = '⛶';
+    btn.title = 'Fullscreen';
+  }
+}
+
+// Sync button icon when user presses Escape to exit fullscreen
+document.addEventListener('fullscreenchange', () => {
+  const btn = document.getElementById('fsBtn');
+  if (!document.fullscreenElement) {
+    if (btn) btn.textContent = '⛶';
+    // Unlock orientation
+    if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+  } else {
+    if (btn) btn.textContent = '✕';
+  }
+});
+document.addEventListener('webkitfullscreenchange', () => {
+  const btn = document.getElementById('fsBtn');
+  if (!document.webkitFullscreenElement) {
+    if (btn) btn.textContent = '⛶';
+  } else {
+    if (btn) btn.textContent = '✕';
+  }
+});
 function setQ(el, quality) {
   document.querySelectorAll('.q-pill').forEach(p => p.classList.remove('active'));
   el.classList.add('active');
