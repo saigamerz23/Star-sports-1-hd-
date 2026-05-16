@@ -556,4 +556,337 @@ footer strong { font-family:'Rajdhani',sans-serif;font-size:13px;color:var(--mut
   <div class="popup">
     <span class="popup-emoji">📡</span>
     <h2>EDGE LIVE</h2>
-    <p>Get live match clips, exclusive highlights & instant stream links on Telegram 🚀<
+    <p>Get live match clips, exclusive highlights & instant stream links on Telegram 🚀</p>
+    <a href="https://t.me/+WTsvhyPbmHM5M2Zl" class="tg-big-btn" target="_blank">✈️ Join Telegram Channel</a>
+    <br>
+    <button class="skip-btn" onclick="closePopup()">Already a member</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="hdr">
+    <div class="hdr-logo">
+      <div class="logo-gem">⚡</div>
+      <div>
+        <div class="logo-name">EDGE LIVE</div>
+        <div class="logo-sub">HD Streaming</div>
+      </div>
+    </div>
+    <div class="hdr-right">
+      <div class="live-chip"><div class="live-pip"></div>LIVE</div>
+      <a href="https://t.me/+WTsvhyPbmHM5M2Zl" class="tg-btn-sm" target="_blank">Join</a>
+    </div>
+  </div>
+
+  <!-- PLAYER -->
+  <div class="player-section">
+    <div class="player-ring"></div>
+    <div class="player-shell">
+      <div class="player-frame" id="playerFrame">
+
+        <!-- Top bar -->
+        <div class="player-topbar">
+          <div class="ptb-left">
+            <div class="ptb-live"><div class="ptb-dot"></div>LIVE</div>
+            <div class="ptb-ch">Fox Kayo Sports HD</div>
+          </div>
+          <div class="ptb-right">
+            <a href="https://allrounder-live9.pages.dev/channel/ptv" class="ptb-icon-btn" target="_blank" title="Fullscreen">⛶</a>
+          </div>
+        </div>
+
+        <!-- iframe -->
+        <iframe
+          id="streamIframe"
+          src="https://allrounder-live9.pages.dev/channel/ptv"
+          allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+          allowfullscreen="true"
+          referrerpolicy="no-referrer"
+          scrolling="no">
+        </iframe>
+
+        <!-- Bottom bar -->
+        <div class="player-bottombar">
+          <div class="pbb-left">
+            <div class="quality-pills">
+              <div class="q-pill" onclick="setQ(this,'Auto')">Auto</div>
+              <div class="q-pill active" onclick="setQ(this,'HD')">HD</div>
+              <div class="q-pill" onclick="setQ(this,'SD')">SD</div>
+            </div>
+          </div>
+          <div class="pbb-right">
+            <a href="https://allrounder-live9.pages.dev/channel/ptv" class="fullscreen-btn" target="_blank">⛶ Full</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- CHANNEL STRIP -->
+  <div class="ch-strip">
+    <div class="ch-left">
+      <div class="ch-ico">🦊</div>
+      <div>
+        <div class="ch-name">Fox Kayo Sports</div>
+        <div class="ch-meta">Sports · Hindi · HD</div>
+      </div>
+    </div>
+    <div class="ch-right">
+      <div class="hd-pill">HD</div>
+      <div class="status-dot-wrap">
+        <div class="online-dot"></div>
+        <div class="status-txt">Online</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE GRID -->
+  <div class="feat-grid">
+    <div class="feat-card" onclick="sharePage()">
+      <div class="feat-badge">NEW</div>
+      <span class="feat-icon">📤</span>
+      <div class="feat-title">Share Stream</div>
+      <div class="feat-desc">Share this stream with friends instantly</div>
+    </div>
+    <div class="feat-card" onclick="copyLink()">
+      <span class="feat-icon">🔗</span>
+      <div class="feat-title">Copy Link</div>
+      <div class="feat-desc">Copy stream link to clipboard</div>
+    </div>
+    <div class="feat-card" onclick="reloadStream()">
+      <span class="feat-icon">🔄</span>
+      <div class="feat-title">Reload Stream</div>
+      <div class="feat-desc">Refresh if stream is buffering</div>
+    </div>
+    <div class="feat-card" onclick="openTelegram()">
+      <div class="feat-badge">HOT</div>
+      <span class="feat-icon">✈️</span>
+      <div class="feat-title">Telegram</div>
+      <div class="feat-desc">Get exclusive links & highlights</div>
+    </div>
+  </div>
+
+  <!-- CONNECTION SPEED ── -->
+  <div class="speed-card">
+    <div class="speed-header">
+      <div class="speed-title">📶 Connection</div>
+      <div class="speed-refresh" id="speedBtn" onclick="refreshSpeed()">↻ Refresh</div>
+    </div>
+    <div class="speed-bars">
+      <div class="speed-item">
+        <div class="speed-val" id="dlSpeed">—</div>
+        <div class="speed-unit">Mbps</div>
+        <div class="speed-lbl">Download</div>
+      </div>
+      <div class="speed-divider"></div>
+      <div class="speed-item">
+        <div class="speed-val" id="latency">—</div>
+        <div class="speed-unit">ms</div>
+        <div class="speed-lbl">Latency</div>
+      </div>
+      <div class="speed-divider"></div>
+      <div class="speed-item">
+        <div class="speed-val" id="connQual">—</div>
+        <div class="speed-unit">&nbsp;</div>
+        <div class="speed-lbl">Quality</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOW ON AIR -->
+  <div class="onair-card">
+    <div class="onair-header">
+      <div class="onair-label">Now On Air</div>
+      <div class="onair-divider"></div>
+    </div>
+    <div class="onair-prog">
+      <div class="onair-thumb">🏏</div>
+      <div class="onair-info">
+        <div class="onair-name" id="nowName">Loading...</div>
+        <div class="onair-time" id="nowTime">—</div>
+      </div>
+    </div>
+    <div class="prog-bar-wrap"><div class="prog-bar-fill" id="progFill"></div></div>
+    <div class="prog-times">
+      <div class="prog-time" id="progStart">—</div>
+      <div class="prog-time" id="progEnd">—</div>
+    </div>
+    <div class="next-up">
+      <div class="next-label">NEXT</div>
+      <div class="next-name" id="nextName">Loading...</div>
+      <div class="next-time" id="nextTime">—</div>
+    </div>
+  </div>
+
+  <!-- TELEGRAM PANEL -->
+  <div class="tg-panel">
+    <div class="tg-title">Stay in the Loop</div>
+    <p class="tg-desc">Live match clips 🎥, rare highlights 🔥, and exclusive stream links — delivered instantly 🚀</p>
+    <a href="https://t.me/+WTsvhyPbmHM5M2Zl" class="tg-big-btn" target="_blank">📲 Join Telegram For More</a>
+    <div class="util-row">
+      <div class="util" onclick="sharePage()">📤 Share</div>
+      <div class="util" onclick="copyLink()">🔗 Copy</div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Made with ❤️ for every fan by sai</p>
+    <strong>© EDGE LIVE</strong>
+  </footer>
+
+</div>
+
+<script>
+// ── POPUP ──
+window.onload = function() {
+  if (sessionStorage.getItem("elite_access") === "true") {
+    document.getElementById("popup").style.display = "none";
+  }
+  measureSpeed();
+  initSchedule();
+};
+
+function closePopup() {
+  const el = document.getElementById("popup");
+  el.style.transition = "opacity 0.3s ease";
+  el.style.opacity = "0";
+  setTimeout(() => el.style.display = "none", 300);
+  sessionStorage.setItem("elite_access", "true");
+}
+
+// ── ACTIONS ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href);
+  showToast('✓ Link Copied!');
+}
+
+function sharePage() {
+  if (navigator.share) {
+    navigator.share({ title: 'EdgeLive | Fox Kayo HD', url: window.location.href });
+  } else { copyLink(); }
+}
+
+function openTelegram() {
+  window.open('https://t.me/+WTsvhyPbmHM5M2Zl', '_blank');
+}
+
+function reloadStream() {
+  const iframe = document.getElementById('streamIframe');
+  if (iframe) {
+    iframe.src = iframe.src;
+    showToast('🔄 Stream Reloaded!');
+  }
+}
+
+// ── QUALITY PILLS ──
+function setQ(el, quality) {
+  document.querySelectorAll('.q-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  showToast('Quality set to ' + quality);
+}
+
+// ── CONNECTION SPEED METER ──
+function measureSpeed() {
+  // Simulate realistic speed reading
+  const dl = (Math.random() * 60 + 20).toFixed(1);
+  const lat = Math.floor(Math.random() * 40 + 12);
+  let qual, qualColor;
+  if (dl > 50) { qual = 'Great'; qualColor = '#00E896'; }
+  else if (dl > 25) { qual = 'Good'; qualColor = '#FFB800'; }
+  else { qual = 'Fair'; qualColor = '#FF4757'; }
+
+  setTimeout(() => {
+    const dlEl = document.getElementById('dlSpeed');
+    const latEl = document.getElementById('latency');
+    const qEl = document.getElementById('connQual');
+    if (dlEl) { dlEl.textContent = dl; }
+    if (latEl) { latEl.textContent = lat; }
+    if (qEl) { qEl.textContent = qual; qEl.style.color = qualColor;
+      qEl.style.webkitTextFillColor = qualColor; }
+  }, 800);
+}
+
+function refreshSpeed() {
+  const btn = document.getElementById('speedBtn');
+  ['dlSpeed','latency','connQual'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) { el.textContent = '…'; el.style.webkitTextFillColor = ''; }
+  });
+  btn.classList.add('spinning');
+  setTimeout(() => btn.classList.remove('spinning'), 800);
+  measureSpeed();
+  showToast('📶 Checking connection...');
+}
+
+// ── SCHEDULE / NOW ON AIR ──
+function initSchedule() {
+  const schedule = [
+    { name: 'IPL 2025 · MI vs CSK', start: '14:00', end: '18:00', icon: '🏏' },
+    { name: 'Live Cricket Analysis', start: '18:00', end: '19:00', icon: '📊' },
+    { name: 'PKL Season 11 Highlights', start: '19:00', end: '20:30', icon: '🤼' },
+    { name: 'Fox Sports Wrap-Up', start: '20:30', end: '22:00', icon: '🎙️' },
+    { name: 'Late Night Cricket Show', start: '22:00', end: '23:59', icon: '🌙' },
+  ];
+
+  function toMins(t) {
+    const [h,m] = t.split(':').map(Number);
+    return h * 60 + m;
+  }
+
+  function fmtTime(t) {
+    const [h,m] = t.split(':').map(Number);
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    const hh = h % 12 || 12;
+    return `${hh}:${m.toString().padStart(2,'0')} ${ampm}`;
+  }
+
+  function update() {
+    const now = new Date();
+    const nowMins = now.getHours() * 60 + now.getMinutes();
+    let currentIdx = schedule.findIndex((s,i) => {
+      const s1 = toMins(s.start), e1 = toMins(s.end);
+      return nowMins >= s1 && nowMins < e1;
+    });
+    if (currentIdx === -1) currentIdx = 0;
+    const cur = schedule[currentIdx];
+    const next = schedule[(currentIdx + 1) % schedule.length];
+    const startM = toMins(cur.start), endM = toMins(cur.end);
+    const pct = Math.min(100, Math.max(0, ((nowMins - startM) / (endM - startM)) * 100));
+
+    const nn = document.getElementById('nowName');
+    const nt = document.getElementById('nowTime');
+    const pf = document.getElementById('progFill');
+    const ps = document.getElementById('progStart');
+    const pe = document.getElementById('progEnd');
+    const nxn = document.getElementById('nextName');
+    const nxt = document.getElementById('nextTime');
+
+    if (nn) nn.textContent = cur.name;
+    if (nt) nt.textContent = fmtTime(cur.start) + ' – ' + fmtTime(cur.end);
+    if (pf) pf.style.width = pct + '%';
+    if (ps) ps.textContent = fmtTime(cur.start);
+    if (pe) pe.textContent = fmtTime(cur.end);
+    if (nxn) nxn.textContent = next.name;
+    if (nxt) nxt.textContent = fmtTime(next.start);
+  }
+
+  update();
+  setInterval(update, 30000);
+}
+
+document.onkeydown = (e) => {
+  if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) return false;
+};
+</script>
+</body>
+</html>
